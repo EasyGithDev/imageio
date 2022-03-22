@@ -18,7 +18,7 @@ const DIR_IN = "./sample/in"
 const DIR_OUT = "./sample/out"
 
 // Generate jpg, png and gif from a rgb file
-func read(filename string, width int, height int) {
+func readFromRGB(filename string, width int, height int) {
 	f, err := os.Open(DIR_IN + "/" + filename)
 
 	if err != nil {
@@ -57,7 +57,7 @@ func read(filename string, width int, height int) {
 }
 
 // Get image from an URL and write the rgb file
-func write(url string) (string, int, int) {
+func writeToRGB(url string) (string, int, int) {
 	res, err := http.Get(url)
 	if err != nil || res.StatusCode != 200 {
 		log.Fatalf("unable to read file: %v", err)
@@ -83,10 +83,10 @@ func write(url string) (string, int, int) {
 
 func main() {
 
-	read("lena_512x512.rgb", 512, 512)
+	readFromRGB("lena_512x512.rgb", 512, 512)
 
-	filename, w, h := write("https://upload.wikimedia.org/wikipedia/commons/d/df/Go_gopher_app_engine_color.jpg")
+	filename, w, h := writeToRGB("https://upload.wikimedia.org/wikipedia/commons/d/df/Go_gopher_app_engine_color.jpg")
 
-	read(filename, w, h)
+	readFromRGB(filename, w, h)
 
 }
